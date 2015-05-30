@@ -1,0 +1,3 @@
+Create a default configuration to your Rails App.
+
+  rails g rails_toolbox:install

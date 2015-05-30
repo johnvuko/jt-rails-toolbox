@@ -1,0 +1,37 @@
+# default:
+#   files:
+#     folder: upload
+#   mail:
+#     delivery_method: test
+#   hosts:
+#     host: localhost
+#     asset_host: same as host
+#     cdn_host: same as host
+#   sidekiq:
+#     redis_url: redis://localhost:6379/nameoftheapp
+
+production:
+  exception:
+    email_prefix: '[ERROR]'
+    sender_address: "Your website <error@example.com>"
+    exception_recipients:
+     - my_email_for_errors@example.com
+  files:
+    folder: upload
+  mail:
+    from: "Your website <contact@example.com>"
+    delivery_method: smtp
+    smtp_settings:
+      address: smtp.gmail.com
+      port: 587
+      domain: example.com
+      user_name: username
+      password: password
+      authentication: plain
+      enable_starttls_auto: true
+  hosts:
+    host: https://www.example.com
+    asset_host: https://asset.example.com
+    cdn_host: https://cdn.example.com
+  sidekiq:
+    redis_url: redis://localhost:6379/my_app
