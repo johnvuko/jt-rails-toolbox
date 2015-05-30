@@ -1,6 +1,6 @@
 # JTRailsToolboox
 
-JTRailsToolboox contains a list of common libs used for rails development.
+JTRailsToolboox contains a list of common libs used for Ruby On Rails development.
 
 ## Installation
 

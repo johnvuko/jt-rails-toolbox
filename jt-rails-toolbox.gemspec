@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
 	s.name = 'jt-rails-toolbox'
-	s.summary = "Common libs used for rails development."
-	s.description = "JTRailsToolboox contains a list of common libs used for rails development."
+	s.summary = "Common libs used for Ruby On Rails development."
+	s.description = "JTRailsToolboox contains a list of common libs used for Ruby On Rails development."
 	s.homepage = 'https://github.com/jonathantribouharet/jt-rails-toolbox'
-	s.version = '1.0.0'
+	s.version = '1.0.1'
 	s.files = `git ls-files`.split("\n")
 	s.require_paths = ['lib']
 	s.authors = ['Jonathan TRIBOUHARET']
