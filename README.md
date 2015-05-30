@@ -68,3 +68,6 @@ ActionMailer can be configured easily just with `jt-toolbox.yml` file.
 ## License
 
 JTRailsToolboox is released under the MIT license. See the LICENSE file for more info.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonathantribouharet/jt-rails-toolbox/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
