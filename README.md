@@ -1,14 +1,14 @@
-# JTRailsToolboox
+# JTRailsToolbox
 
-JTRailsToolboox contains a list of common libs used for Ruby On Rails development.
+JTRailsToolbox contains a list of common libs used for Ruby On Rails development.
 
 ## Installation
 
-JTRailsToolboox is distributed as a gem, which is how it should be used in your app.
+JTRailsToolbox is distributed as a gem, which is how it should be used in your app.
 
 Include the gem in your Gemfile:
 
-    gem 'jt-rails-toolboox', '~> 1.0'
+    gem 'jt-rails-toolbox', '~> 1.0'
 
 Create a `jt-toolbox.yml` file:
 
@@ -67,4 +67,4 @@ ActionMailer can be configured easily just with `jt-toolbox.yml` file.
 
 ## License
 
-JTRailsToolboox is released under the MIT license. See the LICENSE file for more info.
+JTRailsToolbox is released under the MIT license. See the LICENSE file for more info.
