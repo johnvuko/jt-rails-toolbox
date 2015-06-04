@@ -4,6 +4,10 @@ require 'sidekiq'
 require 'validates_email_format_of'
 require 'rails_i18n'
 
+if Rails.env.development?
+	require 'quiet_assets'
+end
+
 require 'exception_notification/rails'
 require 'exception_notification/sidekiq'
 
@@ -16,10 +20,6 @@ module JTRailsToolbox
 		initializer "jt-rails-toolbox" do |app|
 			if ::File.exists?('config/jt-toolbox.yml')
 				load_params(app)
-
-				if Rails.env.development?
-					require 'quiet_assets'
-				end
 
 				configure_exception_notification(app)
 				configure_mail(app)
