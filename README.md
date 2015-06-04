@@ -21,7 +21,8 @@ Create a `jt-toolbox.yml` file:
 - [quiet_assets](https://github.com/evrone/quiet_assets), silence assets in log
 - [sidekiq](https://github.com/mperham/sidekiq), manage background jobs
 - [validates_email_format_of](https://github.com/validates-email-format-of/validates_email_format_of), who doesn't need to validate email format?
-- simplified configuration of hostnames and `ActionMailer` with YAML
+- [rails-i18n](https://github.com/svenfuchs/rails-i18n) Default locale data
+- simplified configuration of hostnames and `ActionMailer` with a YAML file
 
 ### Exception Notification
 

@@ -2,6 +2,7 @@ require 'exception_notification'
 require 'paperclip'
 require 'sidekiq'
 require 'validates_email_format_of'
+require 'rails_i18n'
 
 require 'exception_notification/rails'
 require 'exception_notification/sidekiq'
