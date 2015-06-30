@@ -18,20 +18,20 @@ module JTRailsToolbox
 	class Railtie < ::Rails::Railtie
 		
 		initializer "jt-rails-toolbox" do |app|
+			@params = {}
+
 			if ::File.exists?('config/jt-toolbox.yml')
-				load_params(app)
-
-				configure_exception_notification(app)
-				configure_mail(app)
-				configure_paperclip(app)
-				configure_sidekiq(app)
+				yaml = YAML.load_file('config/jt-toolbox.yml')
+				if yaml
+					@params = yaml[Rails.env.to_s] || {}
+				end
 			end
-		end
-
-		def load_params(app)
-			@params = YAML.load_file('config/jt-toolbox.yml')[Rails.env.to_s] || {}
 
 			process_params
+			configure_exception_notification(app)
+			configure_mail(app)
+			configure_paperclip(app)
+			configure_sidekiq(app)
 		end
 
 		def process_params
