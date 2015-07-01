@@ -22,6 +22,7 @@ Create a `jt-toolbox.yml` file:
 - [sidekiq](https://github.com/mperham/sidekiq), manage background jobs
 - [validates_email_format_of](https://github.com/validates-email-format-of/validates_email_format_of), who doesn't need to validate email format?
 - [rails-i18n](https://github.com/svenfuchs/rails-i18n) Default locale data
+- [jt-rails-meta](https://github.com/jonathantribouharet/jt-rails-meta) Manage HTML meta tags
 - simplified configuration of hostnames and `ActionMailer` with a YAML file
 
 ### Exception Notification
