@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
 	s.summary = "Common libs used for Ruby On Rails development."
 	s.description = "JTRailsToolbox contains a list of common libs used for Ruby On Rails development."
 	s.homepage = 'https://github.com/jonathantribouharet/jt-rails-toolbox'
-	s.version = '1.0.5'
+	s.version = '1.0.6'
 	s.files = `git ls-files`.split("\n")
 	s.require_paths = ['lib']
 	s.authors = ['Jonathan TRIBOUHARET']
@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
 	s.add_dependency('validates_email_format_of', '~> 1.6')
 	s.add_dependency('rails-i18n', '~> 4.0')
 	s.add_dependency('jt-rails-meta', '~> 1.0')
+	s.add_dependency('jt-rails-generator-user', '~> 1.0')
 end

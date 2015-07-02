@@ -1,5 +1,7 @@
 # JTRailsToolbox
 
+[![Gem Version](https://badge.fury.io/rb/jt-rails-toolbox.svg)](http://badge.fury.io/rb/jt-rails-toolbox)
+
 JTRailsToolbox contains a list of common libs used for Ruby On Rails development.
 
 ## Installation
@@ -12,7 +14,7 @@ Include the gem in your Gemfile:
 
 Create a `jt-toolbox.yml` file:
 
-	rails g rails_toolbox:install
+	rails g jt:toolbox
 
 ## What's in it?
 
@@ -23,6 +25,7 @@ Create a `jt-toolbox.yml` file:
 - [validates_email_format_of](https://github.com/validates-email-format-of/validates_email_format_of), who doesn't need to validate email format?
 - [rails-i18n](https://github.com/svenfuchs/rails-i18n) Default locale data
 - [jt-rails-meta](https://github.com/jonathantribouharet/jt-rails-meta) Manage HTML meta tags
+- [jt-rails-generator-user](https://github.com/jonathantribouharet/jt-rails-generator-user) Generate a scaffold for user authentication
 - simplified configuration of hostnames and `ActionMailer` with a YAML file
 
 ### Exception Notification
