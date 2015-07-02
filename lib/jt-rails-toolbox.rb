@@ -3,6 +3,7 @@ require 'paperclip'
 require 'sidekiq'
 require 'validates_email_format_of'
 require 'rails_i18n'
+require 'jt-rails-meta'
 
 if Rails.env.development?
 	require 'quiet_assets'
