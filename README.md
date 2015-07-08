@@ -26,6 +26,7 @@ Create a `jt-toolbox.yml` file:
 - [rails-i18n](https://github.com/svenfuchs/rails-i18n) Default locale data
 - [jt-rails-meta](https://github.com/jonathantribouharet/jt-rails-meta) Manage HTML meta tags
 - [jt-rails-generator-user](https://github.com/jonathantribouharet/jt-rails-generator-user) Generate a scaffold for user authentication
+- [jt-rails-tokenizable](https://github.com/jonathantribouharet/jt-rails-tokenizable) Generate tokens for ActiveRecord models
 - simplified configuration of hostnames and `ActionMailer` with a YAML file
 
 ### Exception Notification

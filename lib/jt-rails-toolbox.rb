@@ -4,6 +4,8 @@ require 'sidekiq'
 require 'validates_email_format_of'
 require 'rails_i18n'
 require 'jt-rails-meta'
+require 'jt-rails-generator-user'
+require 'jt-rails-tokenizable'
 
 if Rails.env.development?
 	require 'quiet_assets'
