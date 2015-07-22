@@ -4,7 +4,7 @@
 #   mail:
 #     delivery_method: test
 #   hosts:
-#     host: localhost
+#     host: http://localhost:3000
 #     asset_host: same as host
 #     cdn_host: same as host
 #   sidekiq:

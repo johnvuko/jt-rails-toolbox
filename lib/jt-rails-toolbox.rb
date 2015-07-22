@@ -62,7 +62,7 @@ module JTRailsToolbox
 			end
 
 			@params['hosts'] ||= {}
-			@params['hosts']['host'] ||= 'http://localhost'
+			@params['hosts']['host'] ||= 'http://localhost:3000'
 			@params['hosts']['asset_host'] ||= @params['hosts']['host']
 			@params['hosts']['cdn_host'] ||= @params['hosts']['asset_host']
 
