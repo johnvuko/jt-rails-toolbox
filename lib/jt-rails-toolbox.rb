@@ -21,12 +21,12 @@ module JTRailsToolbox
 	class Railtie < ::Rails::Railtie
 		
 		initializer "jt-rails-toolbox" do |app|
-			@params = {}
+			@params = HashWithIndifferentAccess.new
 
 			if ::File.exists?('config/jt-toolbox.yml')
 				yaml = YAML.load_file('config/jt-toolbox.yml')
 				if yaml
-					@params = yaml[Rails.env.to_s] || {}
+					@params = HashWithIndifferentAccess.new(yaml[Rails.env.to_s])
 				end
 			end
 
