@@ -21,12 +21,12 @@ module JTRailsToolbox
 	class Railtie < ::Rails::Railtie
 		
 		initializer "jt-rails-toolbox" do |app|
-			@params = HashWithIndifferentAccess.new
+			@params = {}
 
 			if ::File.exists?('config/jt-toolbox.yml')
 				yaml = YAML.load_file('config/jt-toolbox.yml')
 				if yaml
-					@params = HashWithIndifferentAccess.new(yaml[Rails.env.to_s])
+					@params = yaml[Rails.env.to_s] || {}
 				end
 			end
 
@@ -52,11 +52,11 @@ module JTRailsToolbox
 
 			@params['mail'] ||= {}
 			@params['mail']['delivery_method'] ||= :test
-
 			@params['mail']['delivery_method'] = @params['mail']['delivery_method'].to_sym
 
 			@params['mail']['smtp_settings'] ||= {}
 			settings = @params['mail']['smtp_settings'].dup
+			@params['mail']['smtp_settings'] = {}
 			for key, value in settings
 				@params['mail']['smtp_settings'][key.to_sym] = value
 			end
@@ -89,12 +89,6 @@ module JTRailsToolbox
 			ActionMailer::Base.smtp_settings = @params['mail']['smtp_settings']
 			ActionMailer::Base.default_url_options[:host] = @params['hosts']['host']
 			ActionMailer::Base.default from: @params['mail']['from']
-
-			Rails.configuration.action_mailer.delivery_method = ActionMailer::Base.delivery_method
-			Rails.configuration.action_mailer.smtp_settings = ActionMailer::Base.smtp_settings
-			Rails.configuration.action_mailer.default_url_options ||= {}
-			Rails.configuration.action_mailer.default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
-			Rails.configuration.action_mailer.default = ActionMailer::Base.default
 		end
 
 		def configure_paperclip(app)
