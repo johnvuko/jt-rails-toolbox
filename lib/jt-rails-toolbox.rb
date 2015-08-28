@@ -89,6 +89,12 @@ module JTRailsToolbox
 			ActionMailer::Base.smtp_settings = @params['mail']['smtp_settings']
 			ActionMailer::Base.default_url_options[:host] = @params['hosts']['host']
 			ActionMailer::Base.default from: @params['mail']['from']
+
+			Rails.configuration.action_mailer.delivery_method = ActionMailer::Base.delivery_method
+			Rails.configuration.action_mailer.smtp_settings = ActionMailer::Base.smtp_settings
+			Rails.configuration.action_mailer.default_url_options ||= {}
+			Rails.configuration.action_mailer.default_url_options[:host] = ActionMailer::Base.default_url_options[:host]
+			Rails.configuration.action_mailer.default = ActionMailer::Base.default
 		end
 
 		def configure_paperclip(app)
