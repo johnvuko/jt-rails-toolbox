@@ -47,7 +47,7 @@ In addition to the default ignored exceptions, the following exceptions are also
 
 - configured for `ActiveJob`
 - configured to send notification error with Exception Notification
-- redis url is by default `"redis://localhost:6379/#{name of your application}"`
+- redis url is by default `"redis://localhost:6379/#{name of your application}"` for production and `"redis://localhost:6379/#{name of your application}-{environment}"` for others.
 
 #### Warning
 
