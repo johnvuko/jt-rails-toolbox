@@ -67,7 +67,7 @@ module JTRailsToolbox
 			@params['hosts']['cdn_host'] ||= @params['hosts']['asset_host']
 
 			@params['sidekiq'] ||= {}
-			@params['sidekiq']['redis_url'] ||= "redis://localhost:6379/#{Rails.application.class.parent_name.parameterize}"
+			@params['sidekiq']['redis_url'] ||= "redis://localhost:6379/#{Rails.application.class.parent_name.parameterize}#{Rails.env.production? ? '' : "-#{Rails.env.to_s}"}"
 		end
 
 		def configure_exception_notification(app)
