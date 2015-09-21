@@ -89,7 +89,7 @@ module JTRailsToolbox
 			ActionMailer::Base.smtp_settings = @params['mail']['smtp_settings']
 			ActionMailer::Base.default_url_options[:host] = @params['hosts']['host']
 			ActionMailer::Base.default from: @params['mail']['from']
-			app.config.action_mailer.asset_host = @params['hosts']['asset_host']
+			ActionMailer::Base.asset_host = @params['hosts']['asset_host']
 		end
 
 		def configure_paperclip(app)
