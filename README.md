@@ -47,13 +47,13 @@ In addition to the default ignored exceptions, the following exceptions are also
 
 - configured for `ActiveJob`
 - configured to send notification error with Exception Notification
-- redis url is by default `"redis://localhost:6379/#{name of your application}"` for production and `"redis://localhost:6379/#{name of your application}-{environment}"` for others.
+- redis url is by default `redis://localhost:6379/0` and the namespace is `#{name of your application}` for production and `#{name of your application}-{environment}` for others.
 
 #### Warning
 
 Don't forget to install redis server and to launch sidekiq with:
 
-`bundle exec sidekiq -q default -q mailers`
+`bundle exec sidekiq -e $RAILS_ENV -q default -q mailers -d -L log/sidekiq.log -P tmp/pids/sidekiq.pid`
 
 ### Hostname
 

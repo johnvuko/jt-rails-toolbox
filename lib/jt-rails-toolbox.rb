@@ -67,7 +67,8 @@ module JTRailsToolbox
 			@params['hosts']['cdn_host'] ||= @params['hosts']['asset_host']
 
 			@params['sidekiq'] ||= {}
-			@params['sidekiq']['redis_url'] ||= "redis://localhost:6379/#{Rails.application.class.parent_name.parameterize}#{Rails.env.production? ? '' : "-#{Rails.env.to_s}"}"
+			@params['sidekiq']['redis_url'] ||= "redis://localhost:6379/0"
+			@params['sidekiq']['namespace'] ||= "#{Rails.application.class.parent_name.parameterize}#{Rails.env.production? ? '' : "-#{Rails.env.to_s}"}"
 		end
 
 		def configure_exception_notification(app)
@@ -108,13 +109,13 @@ module JTRailsToolbox
 
 		def configure_sidekiq(app)
 			Sidekiq.configure_server do |config|
-				config.redis = { url: @params['sidekiq']['redis_url'] }
+				config.redis = { url: @params['sidekiq']['redis_url'], namespace: @params['sidekiq']['namespace'] }
 
 				config.error_handlers << Proc.new {|ex, ctx_hash| ExceptionNotifier.notify_exception(ex, data: ctx_hash) }
 			end
 
 			Sidekiq.configure_client do |config|
-				config.redis = { url: @params['sidekiq']['redis_url'] }
+				config.redis = { url: @params['sidekiq']['redis_url'], namespace: @params['sidekiq']['namespace'] }
 			end
 
 			ActiveJob::Base.queue_adapter = :sidekiq
