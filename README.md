@@ -16,6 +16,36 @@ Create a `jt-toolbox.yml` file:
 
 	rails g jt:toolbox
 
+A simple configuration of `jt-toolbox.yml` file:
+
+```yml
+ production:
+   exception:
+     email_prefix: '[ERROR]'
+     sender_address: "Your website <error@example.com>"
+     exception_recipients:
+      - my_email_for_errors@example.com
+   files:
+     folder: upload
+   mail:
+     from: "Your website <contact@example.com>"
+     delivery_method: smtp
+     smtp_settings:
+       address: smtp.gmail.com
+       port: 587
+       domain: example.com
+       user_name: username
+       password: password
+       authentication: plain
+       enable_starttls_auto: true
+   hosts:
+     host: https://www.example.com
+     asset_host: https://asset.example.com
+     cdn_host: https://cdn.example.com
+   sidekiq:
+     redis_url: redis://localhost:6379/my_app
+```
+
 ## What's in it?
 
 - [Exception Notification](https://github.com/smartinez87/exception_notification), send email notifications when errors occur
