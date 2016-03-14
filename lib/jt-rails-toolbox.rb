@@ -104,6 +104,8 @@ module JTRailsToolbox
 
 			Paperclip::Attachment.default_options[:path] = ":rails_root/public/#{path}"
 			Paperclip::Attachment.default_options[:url] = "#{@params['hosts']['cdn_host']}#{path}"
+
+			ActionController::Base.asset_host = @params['hosts']['asset_host']
 			app.config.action_controller.asset_host = @params['hosts']['asset_host']
 		end
 
