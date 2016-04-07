@@ -24,7 +24,7 @@ module JTRailsToolbox
 			@params = {}
 
 			if ::File.exists?('config/jt-toolbox.yml')
-				yaml = YAML.load_file('config/jt-toolbox.yml')
+				yaml = YAML::load(ERB.new(File.read('config/jt-toolbox.yml'), 0, '<>').result)
 				if yaml
 					@params = yaml[Rails.env.to_s] || {}
 				end
