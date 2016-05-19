@@ -66,6 +66,8 @@ module JTRailsToolbox
 			@params['hosts']['asset_host'] ||= @params['hosts']['host']
 			@params['hosts']['cdn_host'] ||= @params['hosts']['asset_host']
 
+			# Should avoid namespace with Redis
+			# http://www.mikeperham.com/2015/09/24/storing-data-with-redis/
 			@params['sidekiq'] ||= {}
 			@params['sidekiq']['redis_url'] ||= "redis://localhost:6379/0"
 			@params['sidekiq']['namespace'] ||= "#{Rails.application.class.parent_name.parameterize}#{Rails.env.production? ? '' : "-#{Rails.env.to_s}"}"
