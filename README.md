@@ -10,11 +10,11 @@ JTRailsToolbox is distributed as a gem, which is how it should be used in your a
 
 Include the gem in your Gemfile:
 
-    gem 'jt-rails-toolbox', '~> 2.0'
+	gem 'jt-rails-toolbox', '~> 2.0'
 
 Create a `jt-toolbox.yml` file:
 
-  rails g jt:toolbox
+	rails g jt:toolbox
 
 A simple configuration of `jt-toolbox.yml` file:
 
