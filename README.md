@@ -10,7 +10,7 @@ JTRailsToolbox is distributed as a gem, which is how it should be used in your a
 
 Include the gem in your Gemfile:
 
-    gem 'jt-rails-toolbox', '~> 1.0'
+    gem 'jt-rails-toolbox', '~> 2.0'
 
 Create a `jt-toolbox.yml` file:
 
@@ -50,7 +50,6 @@ A simple configuration of `jt-toolbox.yml` file:
 
 - [Exception Notification](https://github.com/smartinez87/exception_notification), send email notifications when errors occur
 - [paperclip](https://github.com/thoughtbot/paperclip), manage file upload
-- [quiet_assets](https://github.com/evrone/quiet_assets), silence assets in log
 - [sidekiq](https://github.com/mperham/sidekiq), manage background jobs
 - [validates_email_format_of](https://github.com/validates-email-format-of/validates_email_format_of), who doesn't need to validate email format?
 - [rails-i18n](https://github.com/svenfuchs/rails-i18n) Default locale data

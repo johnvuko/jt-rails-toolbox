@@ -7,10 +7,6 @@ require 'jt-rails-meta'
 require 'jt-rails-generator-user'
 require 'jt-rails-tokenizable'
 
-if Rails.env.development?
-	require 'quiet_assets'
-end
-
 require 'exception_notification/rails'
 require 'exception_notification/sidekiq'
 
