@@ -14,7 +14,7 @@ require 'yaml'
 
 module JTRailsToolbox
 
-	class Railtie < ::Rails::Railtie
+	class Engine < ::Rails::Engine
 		
 		initializer "jt-rails-toolbox" do |app|
 			@params = {}
@@ -122,5 +122,5 @@ module JTRailsToolbox
 		end
 
 	end
-
+		
 end

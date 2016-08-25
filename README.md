@@ -14,7 +14,7 @@ Include the gem in your Gemfile:
 
 Create a `jt-toolbox.yml` file:
 
-	rails g jt:toolbox
+  rails g jt:toolbox
 
 A simple configuration of `jt-toolbox.yml` file:
 
@@ -57,6 +57,7 @@ A simple configuration of `jt-toolbox.yml` file:
 - [jt-rails-generator-user](https://github.com/jonathantribouharet/jt-rails-generator-user) Generate a scaffold for user authentication
 - [jt-rails-tokenizable](https://github.com/jonathantribouharet/jt-rails-tokenizable) Generate tokens for ActiveRecord models
 - simplified configuration of hostnames and `ActionMailer` with a YAML file
+- some helper methods
 
 ### Exception Notification
 
@@ -82,7 +83,9 @@ In addition to the default ignored exceptions, the following exceptions are also
 
 Don't forget to install redis server and to launch sidekiq with:
 
-`bundle exec sidekiq -e $RAILS_ENV -q default -q mailers -d -L log/sidekiq.log -P tmp/pids/sidekiq.pid`
+```
+bundle exec sidekiq -e $RAILS_ENV -q default -q mailers -d -L log/sidekiq.log -P tmp/pids/sidekiq.pid
+```
 
 ### Hostname
 
@@ -95,6 +98,17 @@ It's a good practice to have a different domains for your web server and your fi
 ### ActionMailer
 
 ActionMailer can be configured easily just with `jt-toolbox.yml` file.
+
+### Helper methods
+
+### google_anaytics_tag
+
+It will add automatically in production environment the javascript code for Google Analytics.
+You just have add at the end of your `app/views/layouts/application.html.erb` file:
+
+```
+<%= google_anaytics_tag 'UA-XXXXXXX-X' %>
+```
 
 ## Author
 
