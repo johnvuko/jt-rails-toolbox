@@ -75,8 +75,10 @@ module JTRailsToolbox
 			require 'exception_notification/rails'
 			require 'exception_notification/sidekiq'
 
+			exceptions_to_ignore = %w{ActionController::InvalidCrossOriginRequest ActionController::InvalidAuthenticityToken}
+
 			ExceptionNotification.configure do |config|
-				config.ignored_exceptions += ['ActionController::InvalidCrossOriginRequest', 'ActionController::InvalidAuthenticityToken']
+				config.ignored_exceptions += exceptions_to_ignore
 
 				if !@params['exception']['slack_webhook_url'].blank?
 					config.add_notifier :slack, {
@@ -100,6 +102,12 @@ module JTRailsToolbox
 			require 'airbrake'
 			require 'airbrake/sidekiq/error_handler'
 
+			# Default ignored exceptions in Exception Notification
+			exceptions_to_ignore = %w{ActiveRecord::RecordNotFound Mongoid::Errors::DocumentNotFound AbstractController::ActionNotFound ActionController::RoutingError ActionController::UnknownFormat ActionController::UrlGenerationError}
+
+			# Additionnal exceptions to ignore
+			exceptions_to_ignore.push *%w{ActionController::InvalidCrossOriginRequest ActionController::InvalidAuthenticityToken}
+
 			Airbrake.configure do |c|
 				if @params['airbrake']['host']
 					c.host = @params['airbrake']['host']
@@ -107,12 +115,19 @@ module JTRailsToolbox
 
 				c.project_id = @params['airbrake']['project_id']
 				c.project_key = @params['airbrake']['project_key']
+
 				c.environment = Rails.env
 
 				if @params['airbrake']['ignore_environments']
 					c.ignore_environments = @params['airbrake']['ignore_environments']
 				else
 					c.ignore_environments = %w(development test)
+				end
+			end
+
+			Airbrake.add_filter do |notice|
+				if notice[:errors].any? { |error| exceptions_to_ignore.include?(error[:type]) }
+					notice.ignore!
 				end
 			end
 		end
