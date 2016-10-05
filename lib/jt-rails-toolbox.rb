@@ -1,4 +1,5 @@
-require 'exception_notification'
+require 'dotenv/rails-now'
+require 'http_accept_language'
 require 'paperclip'
 require 'sidekiq'
 require 'validates_email_format_of'
@@ -6,9 +7,6 @@ require 'rails_i18n'
 require 'jt-rails-meta'
 require 'jt-rails-generator-user'
 require 'jt-rails-tokenizable'
-
-require 'exception_notification/rails'
-require 'exception_notification/sidekiq'
 
 require 'yaml'
 
@@ -28,6 +26,7 @@ module JTRailsToolbox
 
 			process_params
 			configure_exception_notification(app)
+			configure_airbrake(app)
 			configure_mail(app)
 			configure_paperclip(app)
 			configure_sidekiq(app)
@@ -72,14 +71,49 @@ module JTRailsToolbox
 		def configure_exception_notification(app)
 			return if @params['exception'].nil?
 
+			require 'exception_notification'
+			require 'exception_notification/rails'
+			require 'exception_notification/sidekiq'
+
 			ExceptionNotification.configure do |config|
 				config.ignored_exceptions += ['ActionController::InvalidCrossOriginRequest', 'ActionController::InvalidAuthenticityToken']
 
-				config.add_notifier :email, {
-					email_prefix: @params['exception']['email_prefix'],
-					sender_address: @params['exception']['sender_address'],
-					exception_recipients: @params['exception']['exception_recipients']
-				}
+				if !@params['exception']['slack_webhook_url'].blank?
+					config.add_notifier :slack, {
+						webhook_url: params['exception']['slack_webhook_url'],
+					}
+				end
+
+				if @params['exception']['exception_recipients']
+					config.add_notifier :email, {
+						email_prefix: @params['exception']['email_prefix'],
+						sender_address: @params['exception']['sender_address'],
+						exception_recipients: @params['exception']['exception_recipients']
+					}
+				end
+			end
+		end
+
+		def configure_airbrake(app)
+			return if @params['airbrake'].nil?
+
+			require 'airbrake'
+			require 'airbrake/sidekiq/error_handler'
+
+			Airbrake.configure do |c|
+				if @params['airbrake']['host']
+					c.host = @params['airbrake']['host']
+				end
+
+				c.project_id = @params['airbrake']['project_id']
+				c.project_key = @params['airbrake']['project_key']
+				c.environment = Rails.env
+
+				if @params['airbrake']['ignore_environments']
+					c.ignore_environments = @params['airbrake']['ignore_environments']
+				else
+					c.ignore_environments = %w(development test)
+				end
 			end
 		end
 
@@ -110,8 +144,6 @@ module JTRailsToolbox
 		def configure_sidekiq(app)
 			Sidekiq.configure_server do |config|
 				config.redis = { url: @params['sidekiq']['redis_url'], namespace: @params['sidekiq']['namespace'] }
-
-				config.error_handlers << Proc.new {|ex, ctx_hash| ExceptionNotifier.notify_exception(ex, data: ctx_hash) }
 			end
 
 			Sidekiq.configure_client do |config|

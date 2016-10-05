@@ -11,7 +11,12 @@
 #     redis_url: redis://localhost:6379/nameoftheapp
 #
 # production:
+#  airbrake:
+#    project_host: "https://errbit.example.com"
+#    project_id: 1
+#    project_key: 12345678901234567890
 #   exception:
+#     slack_webhook_url: https://hooks.slack.com/services/XXXXXXXX
 #     email_prefix: '[ERROR]'
 #     sender_address: "Your website <error@example.com>"
 #     exception_recipients:
