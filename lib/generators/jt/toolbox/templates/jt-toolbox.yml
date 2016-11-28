@@ -12,10 +12,16 @@
 #
 # production:
 #   exception:
+#     airbrake:
+#       project_host: "https://errbit.example.com"
+#       project_id: 1
+#       project_key: 12345678901234567890
+#     slack:
+#       webhook_url: https://hooks.slack.com/services/XXXXXXXX
 #     email_prefix: '[ERROR]'
 #     sender_address: "Your website <error@example.com>"
 #     exception_recipients:
-#      - my_email_for_errors@example.com
+#       - my_email_for_errors@example.com
 #   files:
 #     folder: upload
 #   mail:
