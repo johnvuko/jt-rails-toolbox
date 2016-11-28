@@ -119,7 +119,7 @@ module JTRailsToolbox
 
 				if @params['exception']['slack']
 					config.add_notifier :slack, {
-						webhook_url: params['exception']['slack']['webhook_url'],
+						webhook_url: @params['exception']['slack']['webhook_url'],
 					}
 				end
 
