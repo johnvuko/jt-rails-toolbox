@@ -22,7 +22,7 @@ A simple configuration of `jt-toolbox.yml` file:
 production:
   exception:
     airbrake:
-      project_host: "https://errbit.example.com"
+      host: "https://errbit.example.com"
       project_id: 1
       project_key: 12345678901234567890
     slack:
