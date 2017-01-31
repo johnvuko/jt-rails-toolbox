@@ -62,6 +62,7 @@ send notifications when errors occur (email, slack)
 - [paperclip](https://github.com/thoughtbot/paperclip), manage file upload
 - [sidekiq](https://github.com/mperham/sidekiq), manage background jobs
 - [validates_email_format_of](https://github.com/validates-email-format-of/validates_email_format_of), who doesn't need to validate email format?
+- [validates_phone_format_of](https://github.com/jonathantribouharet/validates_phone_format_of), validate phone against E.164 format
 - [rails-i18n](https://github.com/svenfuchs/rails-i18n) Default locale data
 - [jt-rails-meta](https://github.com/jonathantribouharet/jt-rails-meta) Manage HTML meta tags
 - [jt-rails-generator-user](https://github.com/jonathantribouharet/jt-rails-generator-user) Generate a scaffold for user authentication
