@@ -10,6 +10,10 @@
 #   sidekiq:
 #     redis_url: redis://localhost:6379/nameoftheapp
 # 
+# development:
+#   sidekiq:
+#     disable: true
+# 
 # production:
 #   exception:
 #     airbrake:

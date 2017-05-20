@@ -1,7 +1,6 @@
 require 'dotenv/rails-now'
 require 'http_accept_language'
 require 'paperclip'
-require 'sidekiq'
 require 'validates_email_format_of'
 require 'validates_phone_format_of'
 require 'rails_i18n'
@@ -10,10 +9,6 @@ require 'jt-rails-generator-user'
 require 'jt-rails-tokenizable'
 
 require 'yaml'
-
-# Don't move this require
-require 'airbrake'
-require 'airbrake/sidekiq/error_handler'
 
 module JTRailsToolbox
 
@@ -30,10 +25,10 @@ module JTRailsToolbox
 			end
 
 			process_params
+			configure_sidekiq(app)
 			configure_exception_notification(app)
 			configure_mail(app)
 			configure_paperclip(app)
-			configure_sidekiq(app)
 		end
 
 		def process_params
@@ -68,6 +63,7 @@ module JTRailsToolbox
 			# Should avoid namespace with Redis
 			# http://www.mikeperham.com/2015/09/24/storing-data-with-redis/
 			@params['sidekiq'] ||= {}
+			@params['sidekiq']['disable'] ||= false
 			@params['sidekiq']['redis_url'] ||= "redis://localhost:6379/0"
 			@params['sidekiq']['namespace'] ||= "#{Rails.application.class.parent_name.parameterize}#{Rails.env.production? ? '' : "-#{Rails.env.to_s}"}"
 		end
@@ -76,6 +72,9 @@ module JTRailsToolbox
 			return if @params['exception'].nil?
 
 			if @params['exception']['airbrake']
+
+				require 'airbrake'
+				require 'airbrake/sidekiq/error_handler' unless sidekiq_disabled?
 
 				Airbrake.configure do |c|
 					if @params['exception']['airbrake']['host']
@@ -109,7 +108,7 @@ module JTRailsToolbox
 
 			require 'exception_notification'
 			require 'exception_notification/rails'
-			require 'exception_notification/sidekiq'
+			require 'exception_notification/sidekiq' unless sidekiq_disabled?
 
 			ExceptionNotification.configure do |config|
 				config.ignored_exceptions += %w{ActionController::InvalidCrossOriginRequest ActionController::InvalidAuthenticityToken}
@@ -142,7 +141,7 @@ module JTRailsToolbox
 			# Strip meta data from images
 			Paperclip::Attachment.default_options[:convert_options] = { all: '-strip' }
 
-			# Params in url are bad for SEO, it's better to use fingerprint for having a unique url
+			# Params in url are bad for SEO, it's better to use fingerprint for having an unique url
 			Paperclip::Attachment.default_options[:use_timestamp] = false
 
 			path = "#{@params['files']['folder']}/:class/:attachment/:id/:style/:fingerprint.:content_type_extension"
@@ -155,6 +154,10 @@ module JTRailsToolbox
 		end
 
 		def configure_sidekiq(app)
+			return if sidekiq_disabled?
+
+			require 'sidekiq'
+
 			Sidekiq.configure_server do |config|
 				config.redis = { url: @params['sidekiq']['redis_url'], namespace: @params['sidekiq']['namespace'] }
 			end
@@ -164,6 +167,10 @@ module JTRailsToolbox
 			end
 
 			ActiveJob::Base.queue_adapter = :sidekiq
+		end
+
+		def sidekiq_disabled?
+			@params['sidekiq']['disable'] == true
 		end
 
 	end
