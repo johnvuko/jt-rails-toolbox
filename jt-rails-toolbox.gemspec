@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
 	s.summary = "Common libs used for Ruby On Rails development."
 	s.description = "JTRailsToolbox contains a list of common libs used for Ruby On Rails development."
 	s.homepage = 'https://github.com/jonathantribouharet/jt-rails-toolbox'
-	s.version = '2.4.3'
+	s.version = '2.5.0'
 	s.files = `git ls-files`.split("\n")
 	s.require_paths = ['lib']
 	s.authors = ['Jonathan TRIBOUHARET']
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 	s.license = 'MIT'
 	s.platform = Gem::Platform::RUBY
 
-	s.add_dependency('rails', '~> 5.0')
+	s.add_dependency('rails', '>= 5')
 	
 	s.add_dependency('dotenv-rails')
 	s.add_dependency('http_accept_language')
@@ -22,12 +22,14 @@ Gem::Specification.new do |s|
 	s.add_dependency('paperclip', '~> 5.0')
 	s.add_dependency('validates_email_format_of', '~> 1.6')
 	s.add_dependency('validates_phone_format_of', '~> 1.0')
-	s.add_dependency('rails-i18n', '~> 5.0')
+	s.add_dependency('rails-i18n', '>= 5')
 	s.add_dependency('jt-rails-meta', '~> 1.0')
 	s.add_dependency('jt-rails-generator-user', '~> 1.0')
 	s.add_dependency('jt-rails-tokenizable', '~> 1.0')
 
-	s.add_dependency('sidekiq', '~> 4.0')
-	s.add_dependency('sinatra') # Admin for sidekiq
-	s.add_dependency('redis-namespace') # Sidekiq
+	s.add_dependency('sidekiq', '< 6')
+	s.add_dependency('redis-namespace')
+
+	s.add_dependency('oj')
+	s.add_dependency('oj_mimic_json')
 end

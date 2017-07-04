@@ -7,6 +7,8 @@ require 'rails_i18n'
 require 'jt-rails-meta'
 require 'jt-rails-generator-user'
 require 'jt-rails-tokenizable'
+require 'oj'
+require 'oj_mimic_json'
 
 require 'yaml'
 
@@ -144,9 +146,12 @@ module JTRailsToolbox
 			# Params in url are bad for SEO, it's better to use fingerprint for having an unique url
 			Paperclip::Attachment.default_options[:use_timestamp] = false
 
-			path = "#{@params['files']['folder']}/:class/:attachment/:id/:style/:fingerprint.:content_type_extension"
+			path = @params['files']['folder'].to_s
+			path = "/#{path}" if !path.start_with?('/')
+			path += '/' if !path.end_with?('/')
+			path += ":class/:attachment/:id/:style/:fingerprint.:content_type_extension"
 
-			Paperclip::Attachment.default_options[:path] = ":rails_root/public/#{path}"
+			Paperclip::Attachment.default_options[:path] = ":rails_root/public#{path}"
 			Paperclip::Attachment.default_options[:url] = "#{@params['hosts']['cdn_host']}#{path}"
 
 			ActionController::Base.asset_host = @params['hosts']['asset_host']
