@@ -67,6 +67,8 @@ send notifications when errors occur (email, slack)
 - [jt-rails-meta](https://github.com/jonathantribouharet/jt-rails-meta) Manage HTML meta tags
 - [jt-rails-generator-user](https://github.com/jonathantribouharet/jt-rails-generator-user) Generate a scaffold for user authentication
 - [jt-rails-tokenizable](https://github.com/jonathantribouharet/jt-rails-tokenizable) Generate tokens for ActiveRecord models
+- [jt-rails-address](https://github.com/jonathantribouharet/jt-rails-address) Helpers for addresses / geolocation management
+- [jt-rails-enum](https://github.com/jonathantribouharet/jt-rails-enum) Enum in models
 - simplified configuration of hostnames and `ActionMailer` with a YAML file
 - some helper methods
 

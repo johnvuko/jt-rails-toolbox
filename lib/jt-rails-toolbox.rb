@@ -7,6 +7,8 @@ require 'rails_i18n'
 require 'jt-rails-meta'
 require 'jt-rails-generator-user'
 require 'jt-rails-tokenizable'
+require 'jt-rails-address'
+require 'jt-rails-enum'
 require 'oj'
 require 'oj_mimic_json'
 
@@ -20,9 +22,10 @@ module JTRailsToolbox
 			@params = {}
 
 			if ::File.exists?('config/jt-toolbox.yml')
-				yaml = YAML::load(ERB.new(File.read('config/jt-toolbox.yml'), 0, '<>').result)
+				yaml = YAML.load(ERB.new(File.read('config/jt-toolbox.yml'), 0, '<>').result)
 				if yaml
-					@params = yaml[Rails.env.to_s] || {}
+					@params = yaml['shared'] || {}
+					@params.deep_merge!(yaml[Rails.env.to_s] || {})
 				end
 			end
 
@@ -75,8 +78,7 @@ module JTRailsToolbox
 
 			if @params['exception']['airbrake']
 
-				require 'airbrake'
-				require 'airbrake/sidekiq/error_handler' unless sidekiq_disabled?
+				require 'airbrake-ruby'
 
 				Airbrake.configure do |c|
 					if @params['exception']['airbrake']['host']
@@ -92,18 +94,6 @@ module JTRailsToolbox
 						c.ignore_environments = @params['exception']['airbrake']['ignore_environments']
 					else
 						c.ignore_environments = %w(development test)
-					end
-				end
-
-				# Default ignored exceptions in Exception Notification
-				exceptions_to_ignore = %w{ActiveRecord::RecordNotFound Mongoid::Errors::DocumentNotFound AbstractController::ActionNotFound ActionController::RoutingError ActionController::UnknownFormat ActionController::UrlGenerationError}
-
-				# Additionnal exceptions to ignore
-				exceptions_to_ignore.push *%w{ActionController::InvalidCrossOriginRequest ActionController::InvalidAuthenticityToken}
-
-				Airbrake.add_filter do |notice|
-					if notice[:errors].any? { |error| exceptions_to_ignore.include?(error[:type]) }
-						notice.ignore!
 					end
 				end
 			end
@@ -126,6 +116,12 @@ module JTRailsToolbox
 						email_prefix: @params['exception']['email_prefix'],
 						sender_address: @params['exception']['sender_address'],
 						exception_recipients: @params['exception']['exception_recipients']
+					}
+				end
+
+				if @params['exception']['airbrake']
+					config.add_notifier :airbrake, -> (exception, options) { 
+						Airbrake.notify(exception)
 					}
 				end
 			end

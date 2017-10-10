@@ -1,4 +1,5 @@
-# default:
+# you can use `shared` for multiple environments 
+# shared:
 #   files:
 #     folder: upload
 #   mail:
@@ -9,7 +10,7 @@
 #     cdn_host: same as host
 #   sidekiq:
 #     redis_url: redis://localhost:6379/nameoftheapp
-# 
+#
 # development:
 #   sidekiq:
 #     disable: true
