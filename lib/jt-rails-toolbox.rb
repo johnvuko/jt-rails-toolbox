@@ -11,6 +11,7 @@ require 'jt-rails-address'
 require 'jt-rails-enum'
 require 'oj'
 require 'oj_mimic_json'
+require 'validates_timeliness'
 
 require 'yaml'
 
