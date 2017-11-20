@@ -78,25 +78,7 @@ module JTRailsToolbox
 			return if @params['exception'].nil?
 
 			if @params['exception']['airbrake']
-
-				require 'airbrake-ruby'
-
-				Airbrake.configure do |c|
-					if @params['exception']['airbrake']['host']
-						c.host = @params['exception']['airbrake']['host']
-					end
-
-					c.project_id = @params['exception']['airbrake']['project_id']
-					c.project_key = @params['exception']['airbrake']['project_key']
-
-					c.environment = Rails.env
-
-					if @params['exception']['airbrake']['ignore_environments']
-						c.ignore_environments = @params['exception']['airbrake']['ignore_environments']
-					else
-						c.ignore_environments = %w(development test)
-					end
-				end
+				puts "[JT-RAILS-TOOLBOX] Airbrake support was remove in 2.8 version"
 			end
 
 			require 'exception_notification'
@@ -117,12 +99,6 @@ module JTRailsToolbox
 						email_prefix: @params['exception']['email_prefix'],
 						sender_address: @params['exception']['sender_address'],
 						exception_recipients: @params['exception']['exception_recipients']
-					}
-				end
-
-				if @params['exception']['airbrake']
-					config.add_notifier :airbrake, -> (exception, options) { 
-						Airbrake.notify(exception)
 					}
 				end
 			end

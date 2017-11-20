@@ -17,10 +17,6 @@
 # 
 # production:
 #   exception:
-#     airbrake:
-#       host: "https://errbit.example.com"
-#       project_id: 1
-#       project_key: 12345678901234567890
 #     slack:
 #       webhook_url: https://hooks.slack.com/services/XXXXXXXX
 #     email_prefix: '[ERROR]'

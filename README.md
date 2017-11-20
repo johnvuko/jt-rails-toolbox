@@ -21,10 +21,6 @@ A simple configuration of `jt-toolbox.yml` file:
 ```yml
 production:
   exception:
-    airbrake:
-      host: "https://errbit.example.com"
-      project_id: 1
-      project_key: 12345678901234567890
     slack:
       webhook_url: https://hooks.slack.com/services/XXXXXXXX
     email_prefix: '[ERROR]'
@@ -58,7 +54,6 @@ production:
 - [dotenv](https://github.com/bkeepers/dotenv), load environment variables from .env file
 - [Exception Notification](https://github.com/smartinez87/exception_notification), 
 send notifications when errors occur (email, slack)
-- [Airbrake](https://github.com/airbrake/airbrake), send notifications when errors occur to [Airbrake](https://airbrake.io/) or [Errbit](http://errbit.com/) 
 - [paperclip](https://github.com/thoughtbot/paperclip), manage file upload
 - [sidekiq](https://github.com/mperham/sidekiq), manage background jobs
 - [validates_email_format_of](https://github.com/validates-email-format-of/validates_email_format_of), who doesn't need to validate email format?
@@ -96,10 +91,6 @@ In addition to the default ignored exceptions, the following exceptions are also
 - `ActionController::InvalidCrossOriginRequest`
 - `ActionController::InvalidAuthenticityToken`
 
-### Airbrake
-
-If `airbrake` is not set in `jt-toolbox.yml` file, Airbrake is disabled.
-
 ### Paperclip
 
 - `convert_options` is set to `-strip`, which means all metadata of images are removed, this is used for reduced the weight of images.
@@ -109,7 +100,7 @@ If `airbrake` is not set in `jt-toolbox.yml` file, Airbrake is disabled.
 ### Sidekiq
 
 - configured for `ActiveJob`
-- configured to send notification error with Exception Notification or Airbrake
+- configured to send notification error with Exception Notification
 - redis url is by default `redis://localhost:6379/0` and the namespace is `#{name of your application}` for production and `#{name of your application}-{environment}` for others.
 
 #### Warning
