@@ -3,10 +3,10 @@ Gem::Specification.new do |s|
 	s.summary = "Common libs used for Ruby On Rails development."
 	s.description = "JTRailsToolbox contains a list of common libs used for Ruby On Rails development."
 	s.homepage = 'https://github.com/jonathantribouharet/jt-rails-toolbox'
-	s.version = '2.8.0'
+	s.version = '2.8.1'
 	s.files = `git ls-files`.split("\n")
 	s.require_paths = ['lib']
-	s.authors = ['Jonathan TRIBOUHARET']
+	s.authors = ['Jonathan VUKOVICH TRIBOUHARET']
 	s.email = 'jonathan.tribouharet@gmail.com'
 	s.license = 'MIT'
 	s.platform = Gem::Platform::RUBY

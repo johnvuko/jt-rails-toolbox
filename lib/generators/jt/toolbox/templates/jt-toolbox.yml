@@ -42,3 +42,4 @@
 #     cdn_host: https://cdn.example.com
 #   sidekiq:
 #     redis_url: redis://localhost:6379/my_app
+#     network_timeout: 5

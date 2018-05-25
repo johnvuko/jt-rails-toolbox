@@ -46,6 +46,7 @@ production:
     cdn_host: https://cdn.example.com
   sidekiq:
     redis_url: redis://localhost:6379/my_app
+    network_timeout: 5
 ```
 
 ## What's in it?
@@ -136,7 +137,7 @@ You just have add at the end of your `app/views/layouts/application.html.erb` fi
 
 ## Author
 
-- [Jonathan Tribouharet](https://github.com/jonathantribouharet) ([@johntribouharet](https://twitter.com/johntribouharet))
+- [Jonathan VUKOVICH TRIBOUHARET](https://github.com/jonathantribouharet) ([@johntribouharet](https://twitter.com/johntribouharet))
 
 ## License
 

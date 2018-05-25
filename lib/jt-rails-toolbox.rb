@@ -136,12 +136,21 @@ module JTRailsToolbox
 
 			require 'sidekiq'
 
+			options = {
+				url: @params['sidekiq']['redis_url'],
+				namespace: @params['sidekiq']['namespace']
+			}
+
+			if @params['sidekiq']['network_timeout'].present?
+				options[:network_timeout] = @params['sidekiq']['network_timeout'].to_i
+			end
+
 			Sidekiq.configure_server do |config|
-				config.redis = { url: @params['sidekiq']['redis_url'], namespace: @params['sidekiq']['namespace'] }
+				config.redis = options
 			end
 
 			Sidekiq.configure_client do |config|
-				config.redis = { url: @params['sidekiq']['redis_url'], namespace: @params['sidekiq']['namespace'] }
+				config.redis = options
 			end
 
 			ActiveJob::Base.queue_adapter = :sidekiq
